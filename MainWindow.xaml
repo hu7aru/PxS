@@ -160,7 +160,9 @@
                 </StackPanel>
 
                 <!-- 中揃え: IRIS PxS タイポグラフィ -->
-                <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="21" Foreground="#1E1E1E"><Run Text="IRIS " FontFamily="Segoe UI, Yu Gothic UI" FontWeight="Bold" /><Run Text="P" FontFamily="Century Schoolbook" FontStyle="Normal" FontWeight="Bold" /><Run Text="x" FontFamily="Century Schoolbook" FontStyle="Italic" FontWeight="Bold" /><Run Text="S" FontFamily="Meiryo UI" FontStyle="Normal" FontWeight="Bold" /></TextBlock>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#1E1E1E">
+                    <Run Text="IRIS " FontFamily="Segoe UI, Yu Gothic UI" FontSize="12" FontWeight="Normal" BaselineAlignment="Center" /><Run Text="P" FontFamily="Century Schoolbook" FontSize="24" FontStyle="Normal" FontWeight="Bold" BaselineAlignment="Center" /><Run Text="x" FontFamily="Century Schoolbook" FontSize="24" FontStyle="Italic" FontWeight="Bold" BaselineAlignment="Center" /><Run Text="S" FontFamily="Century Schoolbook" FontSize="24" FontStyle="Normal" FontWeight="Bold" BaselineAlignment="Center" />
+                </TextBlock>
 
                 <!-- 右詰め: ▼接続機器, 接続状況LED, Scanner Setting (正方形歯車) -->
                 <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
@@ -254,8 +256,8 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Button x:Name="BtnAddFrame" Content="+ コマ枠追加" Grid.Column="0" Margin="0,0,2,0" Click="BtnAddFrame_Click" />
-                                    <Button x:Name="BtnDeleteFrame" Content="選択枠削除" Grid.Column="1" Margin="2,0,0,0" Click="BtnDeleteFrame_Click" />
+                                    <Button x:Name="BtnAddFrame" Grid.Column="0" Margin="0,0,2,0" Click="BtnAddFrame_Click"><TextBlock><Run Text="&#xE109;" FontFamily="Segoe UI Symbol"/><Run Text=" コマ枠追加"/></TextBlock></Button>
+                                    <Button x:Name="BtnDeleteFrame" Grid.Column="1" Margin="2,0,0,0" Click="BtnDeleteFrame_Click"><TextBlock><Run Text="&#xE107;" FontFamily="Segoe UI Symbol"/><Run Text=" 選択枠削除"/></TextBlock></Button>
                                 </Grid>
                                 <Grid Margin="0,4,0,2">
                                     <Grid.ColumnDefinitions>
@@ -342,7 +344,7 @@
                             <RadioButton x:Name="RbViewFull" Style="{StaticResource IconViewButtonStyle}" Content="&#xE155;" FontFamily="Segoe UI Symbol" IsChecked="True" ToolTip="スキャン全体ビュー (Ctrl+1)" Click="ViewMode_Changed" />
                             <RadioButton x:Name="RbViewSingle" Style="{StaticResource IconViewButtonStyle}" Content="&#xE158;" FontFamily="Segoe UI Symbol" ToolTip="コマ個別ビュー (Ctrl+2)" Click="ViewMode_Changed" />
                             <RadioButton x:Name="RbViewTable" Style="{StaticResource IconViewButtonStyle}" Content="&#xE14C;" FontFamily="Segoe UI Symbol" ToolTip="全コマ設定表 (Ctrl+3)" Click="ViewMode_Changed" />
-                            <RadioButton x:Name="RbViewIce" Style="{StaticResource IconViewButtonStyle}" Content="&#x26A1;" FontFamily="Segoe UI Symbol" ToolTip="ICE 赤外線差分マップ (Ctrl+4)" Click="ViewMode_Changed" />
+                            <RadioButton x:Name="RbViewIce" Style="{StaticResource IconViewButtonStyle}" Content="&#xE289;" FontFamily="Segoe UI Symbol" ToolTip="ICE 赤外線差分マップ (Ctrl+4)" Click="ViewMode_Changed" />
                             <Separator Margin="6,2" Width="1" Background="#B0B0B0" />
                             <Button x:Name="BtnZoomOut" Content="&#xE1A4;" Width="24" Height="26" Margin="1,0" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnZoomOut_Click" ToolTip="表示縮小 (-)" />
                             <Border Background="#FFFFFF" BorderBrush="#A0A0A0" BorderThickness="1" CornerRadius="1" Margin="1,0" Height="26" VerticalAlignment="Center" Padding="4,0">
@@ -417,7 +419,7 @@
                                 </StackPanel>
 
                                 <!-- センタリング & 削除 -->
-                                <Button x:Name="BtnFrameCenter" Height="25" Margin="0,0,4,0" Click="BtnFrameCenter_Click" ToolTip="選択コマを画像中央・フィルム幅中央に整列"><TextBlock><Run Text="&#x2299;" FontFamily="Segoe UI Symbol"/><Run Text=" 中央配置"/></TextBlock></Button>
+                                <Button x:Name="BtnFrameCenter" Height="25" Margin="0,0,4,0" Click="BtnFrameCenter_Click" ToolTip="選択コマを画像中央・フィルム幅中央に整列"><TextBlock><Run Text="&#xE1A2;" FontFamily="Segoe UI Symbol"/><Run Text=" 中央配置"/></TextBlock></Button>
                                 <Button x:Name="BtnFrameDeleteQuick" Height="25" Margin="0,0,8,0" Click="BtnDeleteFrame_Click" ToolTip="選択コマを削除 (Deleteキー)"><TextBlock><Run Text="&#xE107;" FontFamily="Segoe UI Symbol"/><Run Text=" 削除"/></TextBlock></Button>
 
                                 <!-- 連動スコープ切替 (選択コマ / 全コマ) -->
@@ -472,7 +474,7 @@
                                     <Button x:Name="BtnNextFrame" Width="90" Height="26" Click="BtnNextFrame_Click" ToolTip="次のコマへ (PageDown)"><TextBlock><Run Text="次のコマ "/><Run Text="&#xE111;" FontFamily="Segoe UI Symbol"/></TextBlock></Button>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                    <Button x:Name="BtnSingleAutoTone" Height="26" Margin="0,0,6,0" Click="BtnAutoTone_Click" ToolTip="このコマの露出・コントラスト・WBを自動最適化 (Ctrl+T)"><TextBlock><Run Text="&#x2728;" FontFamily="Segoe UI Symbol"/><Run Text=" 自動トーン"/></TextBlock></Button>
+                                    <Button x:Name="BtnSingleAutoTone" Height="26" Margin="0,0,6,0" Click="BtnAutoTone_Click" ToolTip="このコマの露出・コントラスト・WBを自動最適化 (Ctrl+T)"><TextBlock><Run Text="&#xE195;" FontFamily="Segoe UI Symbol"/><Run Text=" 自動トーン"/></TextBlock></Button>
                                     <Button x:Name="BtnSingleRotate" Height="26" Click="BtnRotateFrame_Click" ToolTip="90度右回転 (Rキー)"><TextBlock><Run Text="&#xE14A;" FontFamily="Segoe UI Symbol"/><Run Text=" 90°回転"/></TextBlock></Button>
                                 </StackPanel>
                             </Grid>
@@ -618,7 +620,7 @@
                                     <TextBlock x:Name="TxtTintVal" Text="0" Grid.Column="2" TextAlignment="Right" VerticalAlignment="Center" FontSize="11" />
                                 </Grid>
 
-                                <Button x:Name="BtnAutoTone" Height="28" Margin="0,6,0,2" FontWeight="Bold" Background="#D5E8FF" BorderBrush="#0078D7" Click="BtnAutoTone_Click" ToolTip="中央部の露光ヒストグラムとRGBバランスを解析し、露出・コントラスト・WBを自動最適化 (Ctrl+T)"><TextBlock FontWeight="Bold"><Run Text="&#x2728;" FontFamily="Segoe UI Symbol"/><Run Text=" 自動トーン補正 (Auto Tone)"/></TextBlock></Button>
+                                <Button x:Name="BtnAutoTone" Height="28" Margin="0,6,0,2" FontWeight="Bold" Background="#D5E8FF" BorderBrush="#0078D7" Click="BtnAutoTone_Click" ToolTip="中央部の露光ヒストグラムとRGBバランスを解析し、露出・コントラスト・WBを自動最適化 (Ctrl+T)"><TextBlock FontWeight="Bold"><Run Text="&#xE195;" FontFamily="Segoe UI Symbol"/><Run Text=" 自動トーン補正 (Auto Tone)"/></TextBlock></Button>
                                 <Button x:Name="BtnApplyToneToAll" Content="このトーン調整を全コマにコピー" Height="26" Margin="0,2,0,6" Click="BtnApplyToneToAll_Click" ToolTip="現在のコマのトーン設定（露出・コントラスト・彩度・色温度・色合い・ベース色）を全コマに一括適用" />
 
                                 <Label Content="クイックトーンプリセット:" Margin="0,2,0,1" />

@@ -386,12 +386,12 @@ namespace IrisPxS
 
             // 8. マルチストリップ（全スキャン横並び）レイアウト・座標計算検証
             Console.WriteLine("\n[8/8] マルチストリップ（全スキャン横並び）レイアウト・座標計算検証...");
-            testStrip1.PreScanWidth = 3200;
-            testStrip1.PreScanHeight = 850;
-            testStrip2.PreScanWidth = 3200;
-            testStrip2.PreScanHeight = 850;
-            testStrip3.PreScanWidth = 3200;
-            testStrip3.PreScanHeight = 850;
+            testStrip1.PreScanWidth = 850;
+            testStrip1.PreScanHeight = 3200;
+            testStrip2.PreScanWidth = 850;
+            testStrip2.PreScanHeight = 3200;
+            testStrip3.PreScanWidth = 850;
+            testStrip3.PreScanHeight = 3200;
 
             var stripsList = new List<FilmStrip> { testStrip1, testStrip2, testStrip3 };
             double curX = 30.0; // CanvasPadding
@@ -542,12 +542,12 @@ namespace IrisPxS
 
             // 8. マルチストリップ（全スキャン横並び）レイアウト・座標計算検証
             Console.WriteLine("\n[8/8] マルチストリップ（全スキャン横並び）レイアウト・座標計算検証...");
-            testStrip1.PreScanWidth = 3200;
-            testStrip1.PreScanHeight = 850;
-            testStrip2.PreScanWidth = 3200;
-            testStrip2.PreScanHeight = 850;
-            testStrip3.PreScanWidth = 3200;
-            testStrip3.PreScanHeight = 850;
+            testStrip1.PreScanWidth = 850;
+            testStrip1.PreScanHeight = 3200;
+            testStrip2.PreScanWidth = 850;
+            testStrip2.PreScanHeight = 3200;
+            testStrip3.PreScanWidth = 850;
+            testStrip3.PreScanHeight = 3200;
 
             var stripsList = new List<FilmStrip> { testStrip1, testStrip2, testStrip3 };
             double curX = 30.0; // CanvasPadding

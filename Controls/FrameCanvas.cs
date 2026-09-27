@@ -160,13 +160,13 @@ namespace IrisPxS.Controls
             }
 
             double currentX = CanvasPadding;
-            double maxHeight = 800;
+            double maxHeight = 3000;
 
             foreach (var strip in strips)
             {
                 var img = imageProvider(strip);
-                int logW = strip.PreScanWidth > 0 ? strip.PreScanWidth : (img != null ? img.PixelWidth : 3000);
-                int logH = strip.PreScanHeight > 0 ? strip.PreScanHeight : (img != null ? img.PixelHeight : 800);
+                int logW = strip.PreScanWidth > 0 ? strip.PreScanWidth : (img != null ? img.PixelWidth : 800);
+                int logH = strip.PreScanHeight > 0 ? strip.PreScanHeight : (img != null ? img.PixelHeight : 3000);
 
                 if (logH > maxHeight) maxHeight = logH;
 
