@@ -17,6 +17,14 @@ namespace IrisPxS.Models
         }
 
         public string StripId { get; set; } = string.Empty;
+        private string _stripName = string.Empty;
+        public string StripName
+        {
+            get => _stripName;
+            set { _stripName = value; OnPropertyChanged(); OnPropertyChanged(nameof(DisplayFrameTitle)); }
+        }
+
+        public string DisplayFrameTitle => !string.IsNullOrEmpty(_stripName) ? $"{_stripName} #{_frameNumber}" : $"#{_frameNumber}";
 
         // 原稿画像上の切り出し領域 (正規化座標 0.0 ~ 1.0 または ピクセル座標)
         private OpenCvSharp.Rect _cropRect;

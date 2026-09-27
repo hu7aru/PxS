@@ -219,7 +219,7 @@ namespace IrisPxS
             LstCuts.ItemsSource = _currentRoll.Strips;
             LstCuts.SelectedItem = initialStrip;
 
-            LstFilmStrip.ItemsSource = initialStrip.Frames;
+            LstFilmStrip.ItemsSource = _currentRoll.AllFrames;
             DgFramesTable.ItemsSource = _currentRoll.AllFrames;
 
             UpdateCutSummary();
@@ -1270,9 +1270,13 @@ namespace IrisPxS
             ScanCanvas.Frames = strip.Frames;
             ScanCanvas.InvalidateVisual();
 
-            LstFilmStrip.ItemsSource = null;
-            LstFilmStrip.ItemsSource = strip.Frames;
-            TxtFilmstripHeader.Text = $"フィルムストリップ ({strip.Name} - {strip.StatusText})";
+            if (LstFilmStrip.ItemsSource != _currentRoll.AllFrames)
+            {
+                LstFilmStrip.ItemsSource = null;
+                LstFilmStrip.ItemsSource = _currentRoll.AllFrames;
+            }
+            LstFilmStrip.Items.Refresh();
+            TxtFilmstripHeader.Text = $"フィルムストリップ (Film Strip) - 全{_currentRoll.Strips.Count}カット / 全{_currentRoll.AllFrames.Count}コマ";
 
             if (strip.Frames.Count > 0)
             {
@@ -1305,12 +1309,23 @@ namespace IrisPxS
                 foreach (var frame in strip.Frames)
                 {
                     frame.FrameNumber = frameNum++;
+                    frame.StripId = strip.Id;
+                    frame.StripName = strip.Name;
                     _currentRoll.AllFrames.Add(frame);
                 }
                 strip.NotifyFrameCountChanged();
             }
             DgFramesTable.ItemsSource = null;
             DgFramesTable.ItemsSource = _currentRoll.AllFrames;
+            if (LstFilmStrip != null)
+            {
+                if (LstFilmStrip.ItemsSource != _currentRoll.AllFrames)
+                {
+                    LstFilmStrip.ItemsSource = _currentRoll.AllFrames;
+                }
+                LstFilmStrip.Items.Refresh();
+            }
+            TxtFilmstripHeader.Text = $"フィルムストリップ (Film Strip) - 全{_currentRoll.Strips.Count}カット / 全{_currentRoll.AllFrames.Count}コマ";
             UpdateCutSummary();
             UpdateFrameSummary();
         }
@@ -1980,6 +1995,7 @@ namespace IrisPxS
 
         private void LstFilmStrip_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (_isUpdatingUi) return;
             if (LstFilmStrip.SelectedItem is FilmFrame frame && frame != _selectedFrame)
             {
                 SelectFrame(frame);
@@ -2013,9 +2029,19 @@ namespace IrisPxS
 
         private void SelectFrame(FilmFrame frame)
         {
+            if (frame == null) return;
             _isUpdatingUi = true;
             try
             {
+                // もし選択されたコマが別ストリップのコマなら、親ストリップも同期
+                var parentStrip = _currentRoll.Strips.FirstOrDefault(s => s.Id == frame.StripId || s.Frames.Contains(frame));
+                if (parentStrip != null && parentStrip != _currentStrip)
+                {
+                    _currentStrip = parentStrip;
+                    if (LstCuts.SelectedItem != parentStrip) LstCuts.SelectedItem = parentStrip;
+                    SelectCut(parentStrip);
+                }
+
                 _selectedFrame = frame;
 
                 foreach (var f in _currentRoll.AllFrames)
@@ -2024,6 +2050,7 @@ namespace IrisPxS
                 }
 
                 LstFilmStrip.SelectedItem = frame;
+                LstFilmStrip.ScrollIntoView(frame);
                 DgFramesTable.SelectedItem = frame;
                 ScanCanvas.SelectedFrame = frame;
 
